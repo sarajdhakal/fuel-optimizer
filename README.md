@@ -1,77 +1,102 @@
 🚗 Fuel-Optimizer — Route & Fuel Cost Planning API
 
-🔎 Project Overview
+Fuel-Optimizer is a Django-based API that helps users plan long-distance trips across the USA by computing the optimal driving route, selecting cost-efficient fuel stops, and estimating total fuel expense based on vehicle fuel efficiency and range.
+The system also generates an interactive map showing the full route and the recommended fuel stops.
 
-Fuel-Optimizer is a Django-based web API that helps drivers plan long-distance trips across the USA by calculating:
-	•	The optimal driving route between a start and finish location.
-	•	Cost-efficient fuel stops along that route, based on fuel price data.
-	•	Estimated total fuel cost for the journey, based on vehicle range/efficiency.
+⭐ Key Features
 
-It also outputs a map showing the planned route with marked fuel stops, and provides a JSON summary with route, stops, distance, and cost.
+Optimal Route Generation using a free routing API (OpenStreetMap/ORS/MapQuest).
 
-✅ Key Features
-	•	Route generation between two U.S. locations using a free routing service (e.g., OpenStreetMap / ORS / MapQuest).
-	•	Fuel stop optimization — given a dataset of fuel prices, the system selects cheaper refueling points at optimal intervals.
-	•	Cost estimation — using fixed vehicle assumptions (500 miles per tank, 10 miles per gallon), computes total fuel cost for the trip.
-	•	Map generation — produces a visual map with the route and marked fuel stops.
-	•	Simple API interface for easy integration or further front-end development.
+Fuel Stop Optimization based on fuel prices from a provided dataset.
+
+Total Fuel Cost Estimation using:
+
+Vehicle Range: 500 miles per tank
+
+Fuel Efficiency: 10 miles per gallon
+
+Interactive Map Output showing the route and fuel stops.
+
+Simple JSON API for easy integration into other apps.
 
 
-🛠️ Getting Started — Setup & Run
-
+🚀 Getting Started
 Prerequisites
-	•	Python 3.7+
-	•	A valid routing service / API key if required (depending on the map/routing API used).
 
-Installation Steps
+Python 3.7+
 
-# 1. Clone the repository
+Internet connection for routing API
+
+Fuel dataset (included in repo)
+
+Installation
+# Clone the repository
 git clone https://github.com/sarajdhakal/fuel-optimizer.git
 cd fuel-optimizer
 
-# 2. (Optional but recommended) Create a virtual environment
-python -m venv my_venv
-source my_venv/bin/activate   # Windows: my_venv\Scripts\activate
+# Create virtual environment
+python -m venv venv
+source venv/bin/activate        # Windows: venv\Scripts\activate
 
-# 3. Install dependencies
+# Install dependencies
 pip install -r requirements.txt
 
-# 4. Ensure the fuel price dataset is in place
-#    (fuel-prices-for-be-assessment.csv already provided)
-
-# 5. Run the Django server
+# Run the server
 python manage.py runserver
 
-Example API Usage
-
+🔥 API Usage
 Endpoint
 
 POST /api/plan-route/
 
-Request body (JSON):
-
+Request Body
 {
-  "start_location": "New York, NY, USA",
-  "finish_location": "Los Angeles, CA, USA"
+    "start_location": "New York, NY, USA",
+    "finish_location": "Los Angeles, CA, USA"
 }
 
-Example Response:
-
+Sample Response
 {
-  "route_coordinates": [ /* list of lat/lng points */ ],
-  "map_url": "URL-to-generated-map",
-  "fuel_stops": [ /* list of recommended stops */ ],
-  "total_cost": [/* generated */],
-  "total_distance": [ /* 500.0 */ ]
+    "route_coordinates": ["List of lat/lng points"],
+    "map_url": "URL-to-generated-map",
+    "fuel_stops": ["Recommended fuel stop locations"],
+    "total_cost": 123.45,
+    "total_distance": 500.0
 }
 
-🔧 Configuration & Data
-	•	The repo includes a sample fuel price CSV dataset (fuel-prices-for-be-assessment.csv). You can replace or extend this with real or more comprehensive fuel price data.
-	•	Vehicle parameters (range per tank, fuel efficiency) are currently fixed (500 miles per tank, 10 mpg). For real-world use, you may want to make these configurable.
+🛢️ Fuel Price Dataset
 
-📈 Future / Improvement Ideas
-	•	Allow user-specified vehicle fuel efficiency and tank range.
-	•	Accept more flexible inputs: waypoints, mid-trip breaks, alternate routes.
-	•	Integrate real-time fuel price APIs instead of static dataset.
-	•	Add error handling for cases when no fuel stops are available within a segment.
-	•	Build a UI (frontend) to display
+The project includes a CSV file containing fuel prices across multiple U.S. locations.
+You may replace or extend the dataset as needed.
+Location-based fuel stop selection is done using this file.
+
+🧩 How It Works
+
+User Input: Start and end locations.
+
+Route Calculation: Using a free routing API.
+
+Segment Splitting: Route divided into 500-mile segments (vehicle range).
+
+Fuel Stop Selection: Cheapest fuel stop chosen per segment.
+
+Cost Calculation: Based on fuel efficiency and selected stops.
+
+Output: Map + JSON response with full summary.
+
+📈 Future Enhancements
+
+User-provided vehicle range & fuel efficiency
+
+Integration with real-time fuel price APIs
+
+Better route map UI
+
+Error handling for extreme cases
+
+Multi-route & waypoint support
+
+🤝 Contributing
+
+Contributions, issues, and feature requests are welcome.
+Feel free to submit a pull request or open an issue.
