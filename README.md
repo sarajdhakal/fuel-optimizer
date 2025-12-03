@@ -57,7 +57,12 @@ Request Body
 
 Sample Response
 {
-    "route_coordinates": ["List of lat/lng points"],
+    "start_location": "New York, NY, USA",
+    "finish_location": "Los Angeles, CA, USA"
+    "start_lon": "....",
+    'start_lan": "...",
+    "end_lon": "...",
+    "end_lat:"..."
     "map_url": "URL-to-generated-map",
     "fuel_stops": ["Recommended fuel stop locations"],
     "total_cost": 123.45,
