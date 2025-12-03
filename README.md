@@ -63,9 +63,36 @@ Sample Response
     "total_cost": 123.45,
     "total_distance": 500.0
 }
+```
 
-🛢️ Fuel Price Dataset
+# 🛢️ Fuel Price Dataset
 
 The project includes a CSV file containing fuel prices across multiple U.S. locations.
 You may replace or extend the dataset as needed.
 Location-based fuel stop selection is done using this file.
+
+# 🧩 How It Works
+
+User Input: Start and end locations.
+
+Route Calculation: Using a free routing API.
+
+Segment Splitting: Route divided into 500-mile segments (vehicle range).
+
+Fuel Stop Selection: Cheapest fuel stop chosen per segment.
+
+Cost Calculation: Based on fuel efficiency and selected stops.
+
+Output: Map + JSON response with full summary.
+
+# 📈 Future Enhancements
+
+User-provided vehicle range & fuel efficiency
+
+Integration with real-time fuel price APIs
+
+Better route map UI
+
+Error handling for extreme cases
+
+Multi-route & waypoint support
